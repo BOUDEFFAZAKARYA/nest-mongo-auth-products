@@ -68,9 +68,19 @@ export class AuthController {
                 throw new UnauthorizedException();
             }
 
+
             const user = await this.usersService.findOne({id: data['id']});
 
-            const {password, ...result} = user;
+            //const {password, ...result} = user;
+
+
+           const result = user ; 
+
+           delete result.password ;
+
+
+           
+
 
             return result;
         } catch (e) {

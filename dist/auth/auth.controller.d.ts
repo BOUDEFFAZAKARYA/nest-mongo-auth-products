@@ -10,21 +10,5 @@ export declare class AuthController {
     login(email: string, password: string, response: Response): Promise<{
         message: string;
     }>;
-    user(request: Request): Promise<{
-        id: string;
-        username: string;
-        _id?: any;
-        __v?: any;
-        $locals: Record<string, unknown>;
-        $op: "remove" | "save" | "validate";
-        $where: Record<string, unknown>;
-        baseModelName?: string;
-        collection: import("mongoose").Collection<import("bson").Document>;
-        db: import("mongoose").Connection;
-        errors?: import("mongoose").Error.ValidationError;
-        isNew: boolean;
-        schema: import("mongoose").Schema<any, import("mongoose").Model<any, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, {
-            [x: string]: any;
-        }>;
-    }>;
+    user(request: Request): Promise<import("../users/user.model").User>;
 }

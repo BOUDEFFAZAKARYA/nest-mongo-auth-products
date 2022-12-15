@@ -12,28 +12,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("../users/user.service");
-const bcrypt = require("bcrypt");
 const jwt_1 = require("@nestjs/jwt");
 let AuthService = class AuthService {
-    constructor(usersService, jwtService) {
-        this.usersService = usersService;
+    constructor(userService, jwtService) {
+        this.userService = userService;
         this.jwtService = jwtService;
     }
-    async validateUser(username, password) {
-        const user = await this.usersService.getUser({ username });
-        if (!user)
-            return null;
-        const passwordValid = await bcrypt.compare(password, user.password);
-        if (!user) {
-            throw new common_1.NotAcceptableException('could not find the user');
-        }
-        if (user && passwordValid) {
+    async validateUser(username, pass) {
+        const user = await this.userService.findOne(username);
+        if (user && user.password === pass) {
             return user;
         }
         return null;
     }
     async login(user) {
-        const payload = { username: user.username, sub: user._id };
+        const payload = { username: user.username, sub: user.userId };
         return {
             access_token: this.jwtService.sign(payload),
         };
@@ -41,7 +34,7 @@ let AuthService = class AuthService {
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [user_service_1.UsersService, jwt_1.JwtService])
+    __metadata("design:paramtypes", [user_service_1.UserService, jwt_1.JwtService])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

@@ -12,32 +12,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersController = void 0;
+exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
+const creat_user_dto_1 = require("./dtos/creat-user.dto");
 const user_service_1 = require("./user.service");
-const bcrypt = require("bcrypt");
-let UsersController = class UsersController {
+let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
-    async createUser(password, username) {
-        const saltOrRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltOrRounds);
-        const result = await this.userService.createUser(username, hashedPassword);
-        return result;
+    async create(createUserDto) {
+        return this.userService.create(createUserDto);
     }
 };
 __decorate([
-    (0, common_1.Post)('/signup'),
-    __param(0, (0, common_1.Body)('password')),
-    __param(1, (0, common_1.Body)('username')),
+    (0, common_1.Post)('create'),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [creat_user_dto_1.CreateUserDto]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "createUser", null);
-UsersController = __decorate([
-    (0, common_1.Controller)('users'),
-    __metadata("design:paramtypes", [user_service_1.UsersService])
-], UsersController);
-exports.UsersController = UsersController;
+], UserController.prototype, "create", null);
+UserController = __decorate([
+    (0, common_1.Controller)(),
+    __metadata("design:paramtypes", [user_service_1.UserService])
+], UserController);
+exports.UserController = UserController;
 //# sourceMappingURL=user.controller.js.map

@@ -1,9 +1,9 @@
 import { Model } from 'mongoose';
-import { User } from './user.model';
-export declare class UsersService {
+import { CreateUserDto } from './dtos/creat-user.dto';
+import { User, UserDocument } from './schemas/user.schema';
+export declare class UserService {
     private readonly userModel;
-    constructor(userModel: Model<User>);
-    createUser(username: string, password: string): Promise<User>;
-    getUser(query: object): Promise<User>;
-    findOne(condition: any): Promise<User>;
+    constructor(userModel: Model<UserDocument>);
+    create(createUserDto: CreateUserDto): Promise<User>;
+    findOne(username: string): Promise<User>;
 }

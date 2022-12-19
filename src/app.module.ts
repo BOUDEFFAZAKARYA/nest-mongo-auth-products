@@ -7,6 +7,7 @@ import { ProductsModule } from './products/products.module';
 
 import { UserModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { PassModule } from './pass/pass.module';
 
 
 @Module({
@@ -19,6 +20,7 @@ import { AuthModule } from './auth/auth.module';
     ProductsModule,
     UserModule,
     AuthModule,
+    PassModule,
   
   
   ],

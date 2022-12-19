@@ -47,7 +47,7 @@ let ProductsService = class ProductsService {
             price: product.price,
         };
     }
-    async updateProduct(productId, title, desc, price) {
+    async updateProduct(productId, title, desc, price, image) {
         const updatedProduct = await this.findProduct(productId);
         if (title) {
             updatedProduct.title = title;
@@ -57,6 +57,9 @@ let ProductsService = class ProductsService {
         }
         if (price) {
             updatedProduct.price = price;
+        }
+        if (price) {
+            updatedProduct.image = image;
         }
         updatedProduct.save();
     }

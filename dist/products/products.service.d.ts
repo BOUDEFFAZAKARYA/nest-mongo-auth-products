@@ -16,7 +16,7 @@ export declare class ProductsService {
         description: string;
         price: number;
     }>;
-    updateProduct(productId: string, title: string, desc: string, price: number): Promise<void>;
+    updateProduct(productId: string, title: string, desc: string, price: number, image: string): Promise<void>;
     deleteProduct(prodId: string): Promise<void>;
     private findProduct;
 }

@@ -45,6 +45,7 @@ export class ProductsService {
     title: string,
     desc: string,
     price: number,
+    image : string
   ) {
     const updatedProduct = await this.findProduct(productId);
     if (title) {
@@ -55,6 +56,9 @@ export class ProductsService {
     }
     if (price) {
       updatedProduct.price = price;
+    }
+    if (price) {
+      updatedProduct.image = image;
     }
     updatedProduct.save();
   }

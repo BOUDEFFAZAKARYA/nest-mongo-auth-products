@@ -9,6 +9,8 @@ import { UserModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PassModule } from './pass/pass.module';
 
+import { TransportModule } from './transport/transport.module';
+
 
 @Module({
   imports: [
@@ -21,9 +23,11 @@ import { PassModule } from './pass/pass.module';
     UserModule,
     AuthModule,
     PassModule,
+    TransportModule,
   
   
   ],
+
  
 })
 export class AppModule {}

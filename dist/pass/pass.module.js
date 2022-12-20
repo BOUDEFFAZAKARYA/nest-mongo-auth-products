@@ -6,27 +6,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.PassModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const products_module_1 = require("./products/products.module");
-const users_module_1 = require("./users/users.module");
-const auth_module_1 = require("./auth/auth.module");
-const pass_module_1 = require("./pass/pass.module");
-const transport_module_1 = require("./transport/transport.module");
-let AppModule = class AppModule {
+const pass_controller_1 = require("./pass.controller");
+const pass_model_1 = require("./pass.model");
+const pass_service_1 = require("./pass.service");
+const transport_module_1 = require("../transport/transport.module");
+let PassModule = class PassModule {
 };
-AppModule = __decorate([
+PassModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot('mongodb+srv://zakarya:2813132002@cluster0.yb79teb.mongodb.net/test'),
-            products_module_1.ProductsModule,
-            users_module_1.UserModule,
-            auth_module_1.AuthModule,
-            pass_module_1.PassModule,
-            transport_module_1.TransportModule,
+            mongoose_1.MongooseModule.forFeature([{ name: "Pass", schema: pass_model_1.PassSchema }]),
+            transport_module_1.TransportModule
         ],
+        controllers: [pass_controller_1.PassController],
+        providers: [pass_service_1.PassService
+        ],
+        exports: [pass_service_1.PassService]
     })
-], AppModule);
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+], PassModule);
+exports.PassModule = PassModule;
+//# sourceMappingURL=pass.module.js.map

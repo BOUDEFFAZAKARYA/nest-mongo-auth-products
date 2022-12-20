@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 export const PassSchema = new mongoose.Schema({
 
 
-    transport: { type: String, required: true ,     enum: ['train', 'bus' , "plane"]},
+    transport: { type: String, required: true , },
 
     departure: { type: String, required: true },
 
@@ -12,7 +12,7 @@ export const PassSchema = new mongoose.Schema({
 
 
 
-    Gate: { type: Number, required: true },
+    Gate: { type: String, required: true },
 
     seat: { type: String, required: true },
 

@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { createDto } from 'src/transport/transDTO/createDTO';
+import { TransportService } from 'src/transport/transport.service';
 import { createPassDto } from './dtos/createpass';
 import { Pass } from './pass.model';
 
@@ -9,43 +11,61 @@ export class PassService {
 
 
     constructor(
-        @InjectModel('Product') private readonly PassModel: Model<Pass>,
+        @InjectModel('Pass') private readonly PassModel: Model<Pass>,
+
+        private transportservices: TransportService
     ) { }
 
+    async validatePass(transport: string): Promise<boolean> {
 
-    async create(createUserDto:createPassDto ): Promise<Pass> {
+
+
+
+
+        const transTypes = await this.transportservices.isInPassList(transport);
+
+
+        console.log(transport);
+
+
+
+        if (transTypes.length == 0) {
+
+            return false;
+        }
+
+
+        else if ((transport == transTypes[0].name)) {
+
+            return true;
+        }
+    }
+
+    async sortingPass(createUserDto: createPassDto ,){
+
+
+    const passses =    this.getPass(createUserDto);
+
+
+   console.log(passses[0].departure ) ;
+console.log( passses[0].arrival)
+    ;
+
+
+
+    }
+
+
+    async create(createUserDto: createPassDto): Promise<Pass> {
         return await this.PassModel.create(createUserDto);
     }
 
 
-    async insertPass(transport: string, departure: string, arrival: number, Gate: string, seat: string, Baggage_drop: string): Promise<Pass> {
-        const newPass = new this.PassModel({
-
-            transport,
-            departure,
-            arrival,
-            Gate,
-            seat,
-            Baggage_drop
 
 
-        });
-        const result = await newPass.save();
+    async getPass(createUserDto: createPassDto) {
+        return await this.PassModel.find({ createUserDto }, { __v: 0, _id: 0 });
 
-
-        return result;
-    }
-
-    async getProducts() {
-        const Pass = await this.PassModel.find().exec();
-
-
-        return Pass.map(prod => ({
-            id: prod.id,
-            transport: prod.transport,
-            departure: prod.departure,
-            arrival: prod.arrival,
-        }));
     }
 
 

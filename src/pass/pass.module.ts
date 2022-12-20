@@ -6,18 +6,22 @@ import { PassController } from './pass.controller';
 import { PassSchema } from './pass.model';
 import { PassService } from './pass.service';
 
+import { TransportModule } from 'src/transport/transport.module';
 
-@Module({imports: [
-    MongooseModule.forFeature([{ name: PassModule.name, schema: PassSchema }]),
-  ],
+@Module({
+    imports: [
+        MongooseModule.forFeature([{ name: "Pass", schema: PassSchema }]),
+        TransportModule
+    ],
 
-  controllers: [PassController],
-  providers: [PassService],
-
+    controllers: [PassController ],
+    providers: [PassService 
+],
+exports:[PassService]
 
 
 
 })
 
 
-export class PassModule{}
+export class PassModule { }

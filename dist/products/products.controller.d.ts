@@ -1,6 +1,5 @@
 import { StreamableFile } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { Product } from './product.model';
 export declare const storage: {
     storage: import("multer").StorageEngine;
 };
@@ -12,7 +11,6 @@ export declare class ProductsController {
     }>;
     uploadFile(prodTitle: string, prodDesc: string, prodPrice: number, req: any): Promise<{
         prodTitle: string;
-        product: Product;
     }>;
     getAllProducts(): Promise<{
         id: string;

@@ -45,7 +45,6 @@ let ProductsController = class ProductsController {
         const product = req.product;
         return {
             prodTitle,
-            product
         };
     }
     async getAllProducts() {

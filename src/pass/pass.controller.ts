@@ -1,4 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Transport } from 'src/transport/schema/model.trans';
+import { createDto } from 'src/transport/transDTO/createDTO';
 import { createPassDto } from './dtos/createpass';
 import { PassService } from './pass.service';
 
@@ -12,8 +14,27 @@ export class PassController {
 
 
     @Post('create')
-    async create(@Body() createUserDto: createPassDto) {
-        return this.PassServices.create(createUserDto);
+    async create(
+        @Body() createUserDto: createPassDto,
+        @Body("transport") Transport: string) {
+
+        const validation = await this.PassServices.validatePass(Transport);
+
+
+        if (validation) {
+
+            
+            return this.PassServices.create(createUserDto);
+        } else {
+            return "invalid type of transport" ;
+        }
+
+    }
+
+
+    @Get('passes')
+    async find(@Body() createUserDto: createPassDto) {
+        return this.PassServices.getPass(createUserDto);
     }
 
 

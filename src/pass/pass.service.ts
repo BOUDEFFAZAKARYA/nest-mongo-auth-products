@@ -41,15 +41,139 @@ export class PassService {
         }
     }
 
-    async sortingPass(createUserDto: createPassDto ,){
+    async sortingPass(createUserDto: createPassDto, departure: string) {
 
 
-    const passses =    this.getPass(createUserDto);
+        const passses = await this.getPass(createUserDto);
+        let i = 0;
 
 
-   console.log(passses[0].departure ) ;
-console.log( passses[0].arrival)
-    ;
+        var  NewPAsses= [{}] as unknown  as Model<Pass>  ;
+
+        let find = false;
+
+        while (i < passses.length - 1 && !find) {
+
+
+
+
+            if (passses[i].departure === departure
+            ) {
+
+                find = true;
+
+            }
+
+            i = i + 1;
+        };
+
+        i= i- 1;
+
+
+        NewPAsses[0] = passses[i]  ;
+
+
+
+        let findit = false;
+
+         let k = 0;
+
+
+
+
+
+
+        for (let j = 0; j < passses.length - 1; j++) {
+
+             k = 0;
+            console.log(passses[i].arrival);
+            console.log(i);
+
+
+            while (k < passses.length && !findit) {
+
+
+
+                console.log("i"+i);
+
+                console.log(passses[i].arrival);
+
+                console.log("k"+k);
+
+
+
+                if (passses[k].departure === passses[i].arrival
+                ) {
+    
+                    findit = true;
+    
+                }
+    
+                k = k + 1;
+            };
+
+            console.log("k"+k);
+
+            i=k -1;
+            findit= false ;
+
+            NewPAsses[j+1] =  passses[i]  ;
+            
+
+        }
+
+
+
+        console.log(i);
+
+
+
+     const part1 = " 1 / Take "+ NewPAsses[0].transport + " from " + NewPAsses[0].departure + " to " + NewPAsses[0].arrival+ ". Sit in seat " + NewPAsses[0].seat + ", gate " + NewPAsses[0].Gate + " , baggage drop " +  NewPAsses[0].Baggage_drop +  "." + "\n" 
+     
+     + "2 / Take "+ NewPAsses[1].transport + " from " + NewPAsses[1].departure + " to " + NewPAsses[1].arrival+   ". Sit in seat " + NewPAsses[1].seat + ", gate " + NewPAsses[1].Gate + " , baggage drop " +  NewPAsses[1].Baggage_drop + "."   + "\n" ;
+
+
+
+     const part2 =  "3 / Take "+ NewPAsses[2].transport + " from " + NewPAsses[2].departure + " to " + NewPAsses[2].arrival+ ". Sit in seat " + NewPAsses[2].seat +  ", gate " + NewPAsses[2].Gate + " , baggage drop " +  NewPAsses[2].Baggage_drop +"."  + "\n"  ;
+     
+
+     const part3 =  "4 / Take "+ NewPAsses[3].transport + " from " + NewPAsses[3].departure + " to " + NewPAsses[3].arrival+ ". Sit in seat " + NewPAsses[3].seat +  ", gate " + NewPAsses[3].Gate + " , baggage drop " +  NewPAsses[3].Baggage_drop + "." + "\n" ;
+     
+     const par4 = "5 / You have arrived at your final destination";
+
+
+
+
+     
+
+
+
+        const json = { data : [NewPAsses]};
+
+
+
+       // NewPAsses =  JSON.stringify(NewPAsses) ;
+
+
+        console.log(".........");
+
+
+
+
+        
+
+
+
+
+    
+
+
+
+
+        return part1 + part2 + part3 + par4 ;
+
+
+
 
 
 

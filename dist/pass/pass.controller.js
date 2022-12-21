@@ -32,6 +32,9 @@ let PassController = class PassController {
     async find(createUserDto) {
         return this.PassServices.getPass(createUserDto);
     }
+    async findit(createUserDto, departure) {
+        return this.PassServices.sortingPass(createUserDto, departure);
+    }
 };
 __decorate([
     (0, common_1.Post)('create'),
@@ -48,6 +51,14 @@ __decorate([
     __metadata("design:paramtypes", [createpass_1.createPassDto]),
     __metadata("design:returntype", Promise)
 ], PassController.prototype, "find", null);
+__decorate([
+    (0, common_1.Get)('SortingPasses'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Body)('departure')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [createpass_1.createPassDto, String]),
+    __metadata("design:returntype", Promise)
+], PassController.prototype, "findit", null);
 PassController = __decorate([
     (0, common_1.Controller)('pass'),
     __metadata("design:paramtypes", [pass_service_1.PassService])

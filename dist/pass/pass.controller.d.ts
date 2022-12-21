@@ -7,4 +7,5 @@ export declare class PassController {
     find(createUserDto: createPassDto): Promise<(import("./pass.model").Pass & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
+    findit(createUserDto: createPassDto, departure: string): Promise<string>;
 }

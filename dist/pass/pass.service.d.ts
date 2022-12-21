@@ -7,7 +7,7 @@ export declare class PassService {
     private transportservices;
     constructor(PassModel: Model<Pass>, transportservices: TransportService);
     validatePass(transport: string): Promise<boolean>;
-    sortingPass(createUserDto: createPassDto): Promise<void>;
+    sortingPass(createUserDto: createPassDto, departure: string): Promise<string>;
     create(createUserDto: createPassDto): Promise<Pass>;
     getPass(createUserDto: createPassDto): Promise<(Pass & {
         _id: import("mongoose").Types.ObjectId;

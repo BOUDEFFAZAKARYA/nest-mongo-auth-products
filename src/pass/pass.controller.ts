@@ -23,7 +23,7 @@ export class PassController {
 
         if (validation) {
 
-            
+
             return this.PassServices.create(createUserDto);
         } else {
             return "invalid type of transport" ;
@@ -36,6 +36,25 @@ export class PassController {
     async find(@Body() createUserDto: createPassDto) {
         return this.PassServices.getPass(createUserDto);
     }
+
+
+    @Get('SortingPasses')
+    async findit(
+        @Body() createUserDto: createPassDto ,
+
+        @Body( 'departure') departure : string , 
+
+
+    )
+        
+
+    
+    {
+        return this.PassServices.sortingPass(createUserDto ,departure  );
+    }
+
+
+
 
 
 

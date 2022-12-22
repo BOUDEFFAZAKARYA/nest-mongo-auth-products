@@ -38,7 +38,7 @@ export class PassController {
     }
 
 
-    @Get('SortingPasses')
+    @Post('SortingPasses')
     async findit(
         @Body() createUserDto: createPassDto ,
 

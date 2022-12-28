@@ -24,7 +24,6 @@ let PassService = class PassService {
     }
     async validatePass(transport) {
         const transTypes = await this.transportservices.isInPassList(transport);
-        console.log(transport);
         if (transTypes.length == 0) {
             return false;
         }

@@ -1,3 +1,4 @@
+/// <reference types="multer" />
 import { StreamableFile } from '@nestjs/common';
 import { ProductsService } from './products.service';
 export declare const storage: {

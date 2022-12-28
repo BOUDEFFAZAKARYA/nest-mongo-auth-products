@@ -14,6 +14,7 @@ export class createPassDto {
 
 
     seat: string;
+    
     boardTime: string;
 
     Baggage_drop: string;
